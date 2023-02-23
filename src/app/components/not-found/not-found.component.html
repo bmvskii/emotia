@@ -1,0 +1,8 @@
+<nz-empty [nzNotFoundContent]="contentTpl" [nzNotFoundFooter]="footerTpl">
+  <ng-template #contentTpl>
+    <h2>Page is not existed.</h2>
+  </ng-template>
+  <ng-template #footerTpl>
+    <button nz-button nzType="primary" (click)="onClick()">Go Home</button>
+  </ng-template>
+</nz-empty>

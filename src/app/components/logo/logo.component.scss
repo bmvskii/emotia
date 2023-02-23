@@ -1,0 +1,25 @@
+.logo-wrapper {
+  width: 65px;
+
+  .logo {
+    object-fit: contain;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .logo-text {
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  &.light {
+    display: flex;
+    align-items: center;
+    color: light;
+  }
+
+  &.dark {
+    color: black;
+  }
+}

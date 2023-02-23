@@ -1,0 +1,28 @@
+<ng-template [ngIf]="!isEmpty()" [ngIfElse]="showEmptyPlaceholder">
+  <nz-timeline nzMode="left" [ngClass]="compact ? 'compact' : ''">
+    <nz-timeline-item
+      *ngFor="let entry of reactions"
+      [nzLabel]="labelTemplate"
+      [nzDot]="dotTemplate"
+    >
+      {{ entry.title || "No title" }}
+      <ng-template #dotTemplate>
+        <ngx-emoji [emoji]="entry.emoji" set="apple" [size]="40"></ngx-emoji>
+      </ng-template>
+      <ng-template #labelTemplate>
+        <ngx-emoji emoji="zap" set="apple" [size]="20"></ngx-emoji>
+        {{ entry.energyLevel }} / 10
+        <nz-divider nzType="vertical"></nz-divider>
+        <ngx-emoji emoji="clock9" set="apple" [size]="20"></ngx-emoji>
+        {{ getHours(entry.date) }}
+      </ng-template>
+    </nz-timeline-item>
+  </nz-timeline>
+</ng-template>
+<ng-template #showEmptyPlaceholder>
+  <nz-empty [nzNotFoundContent]="contentTpl">
+    <ng-template #contentTpl>
+      <p>Timeline is clear.</p>
+    </ng-template>
+  </nz-empty>
+</ng-template>

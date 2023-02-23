@@ -1,0 +1,19 @@
+.reaction {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 20px 20px 60px rgba(black, .1),
+    -20px -20px 60px rgba(black, .1);
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition: .3s ease-in;
+
+  &:hover {
+    box-shadow: 20px 20px 60px #d6d6d6,
+      -20px -20px 60px #ffffff;
+  }
+}

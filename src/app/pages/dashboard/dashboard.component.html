@@ -1,0 +1,114 @@
+<div class="page-wrapper">
+  <h1 nz-title>Dashboard page</h1>
+  <div class="content-wrapper">
+    <div class="stats-block-wrapper">
+      <div class="stats-block">
+        <nz-statistic
+          [nzValue]="(11.28 | number : '1.0-2')!"
+          [nzTitle]="'Last Month Mood'"
+          [nzPrefix]="prefixTplOne"
+          [nzSuffix]="'%'"
+          [nzValueStyle]="{ color: '#3F8600' }"
+        ></nz-statistic>
+        <ng-template #prefixTplOne
+          ><span nz-icon nzType="arrow-up"></span
+        ></ng-template>
+      </div>
+      <div class="stats-block">
+        <nz-statistic
+          [nzValue]="(9.3 | number : '1.0-2')!"
+          [nzTitle]="'Last Month Energy'"
+          [nzPrefix]="prefixTplTwo"
+          [nzSuffix]="'%'"
+          [nzValueStyle]="{ color: '#CF1322' }"
+        ></nz-statistic>
+        <ng-template #prefixTplTwo
+          ><span nz-icon nzType="arrow-down"></span
+        ></ng-template>
+      </div>
+      <div class="stats-block">
+        <nz-statistic
+          [nzValue]="10"
+          [nzTitle]="'Tracked Days'"
+          [nzSuffix]="'Days'"
+        ></nz-statistic>
+      </div>
+      <div class="stats-block">
+        <nz-statistic
+          [nzValue]="10"
+          [nzTitle]="'Days in Emotia'"
+          [nzSuffix]="'Days'"
+        ></nz-statistic>
+      </div>
+      <!-- <div class="stats-block">
+        <nz-statistic
+          [nzValue]="''"
+          [nzTitle]="'Most popular Emotion'"
+          [nzPrefix]="prefixTplTwo"
+        ></nz-statistic>
+        <ng-template #prefixTplTwo>
+          <ngx-emoji emoji="sob" set="apple" [size]="20"></ngx-emoji>
+        </ng-template>
+      </div> -->
+    </div>
+    <div class="memory-filter">
+      <h3 class="title">Filter memories</h3>
+      <div class="memory-filter__content">
+        <reactions-panel
+          [allowMultipleSelect]="true"
+          (onEmojiSelect)="saveSelectedEmoji($event)"
+        ></reactions-panel>
+        <app-range-selector
+          (dateRangeChanged)="saveDateRange($event)"
+        ></app-range-selector>
+        <button nz-button (click)="getMemories()">Search</button>
+      </div>
+    </div>
+    <ul class="memories-container">
+      <li class="memory" *ngFor="let date of memoriesKeys">
+        <ng-container *ngIf="getMemoriesPerDate(date).length !== 0">
+          <h4 nz-title class="memory-title">{{ getFormattedDate(date) }}</h4>
+          <ul class="memories">
+            <li
+              class="memory__info"
+              *ngFor="let memory of getMemoriesPerDate(date)"
+              (click)="expandInfo(memory.id)"
+            >
+              <div class="memory__info-content">
+                <div class="left">
+                  <ngx-emoji
+                    [emoji]="memory.emoji"
+                    set="apple"
+                    [size]="20"
+                  ></ngx-emoji>
+                  <p class="memory__text">{{ memory.title || "No Title" }}</p>
+                </div>
+                <div class="right">
+                  <ngx-emoji emoji="zap" set="apple" [size]="20"></ngx-emoji>
+                  {{ memory.energyLevel }} / 10
+                  <ngx-emoji emoji="clock9" set="apple" [size]="20"></ngx-emoji>
+                  {{ getHours(memory.date) }}
+                </div>
+              </div>
+              <div
+                class="memory__info-description"
+                *ngIf="expandedMemories.includes(memory.id)"
+              >
+                <h4 nz-title>Moment notes</h4>
+                {{ memory.description }}
+              </div>
+            </li>
+          </ul>
+        </ng-container>
+      </li>
+      <!-- <ng-template #showPlaceholder>
+        <nz-empty [nzNotFoundContent]="contentTpl">
+          <ng-template #contentTpl>
+            <p>No memories selected.</p>
+          </ng-template>
+        </nz-empty>
+      </ng-template> -->
+    </ul>
+  </div>
+</div>
+<!-- <drawer [isVisible]="true"></drawer> -->

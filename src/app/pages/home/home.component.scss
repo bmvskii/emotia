@@ -1,0 +1,101 @@
+@mixin background {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.top-panel {
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  width: 40%;
+  min-width: 300px;
+
+  &__activities {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+
+  &__activity {
+    @include background();
+    padding: 10px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+    @include background();
+    padding: 20px;
+
+    .ant-typography {
+      white-space: nowrap;
+    }
+  }
+
+  &__blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+
+  &__mood {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+::ng-deep .ant-progress-inner {
+  height: 80px !important;
+  width: 80px !important;
+}
+
+app-reactions-timeline {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.form {
+  &__block {
+    margin-bottom: 20px;
+  }
+}
+
+.reactions-timeline {
+  width: 60%;
+  margin-left: 20px;
+
+  &__content {
+    padding: 20px;
+    @include background();
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    @include background();
+    padding: 20px;
+    margin-top: 20px;
+  }
+
+  textarea {
+    resize: none;
+  }
+}

@@ -1,0 +1,47 @@
+.events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.events .ant-badge-status {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  text-overflow: ellipsis;
+  font-size: 12px;
+}
+
+.notes-month {
+  text-align: center;
+  font-size: 28px;
+}
+
+.notes-month section {
+  font-size: 28px;
+}
+
+.empty-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ngx-emoji {
+    height: 20px;
+    margin-right: 10px;
+  }
+}
+
+::ng-deep .ant-picker-panel {
+  background: rgba(255, 255, 255, 0.55) !important;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  * {
+    background-color: transparent !important;
+  }
+
+}

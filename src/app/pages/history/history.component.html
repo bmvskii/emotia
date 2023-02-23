@@ -1,0 +1,24 @@
+<!-- NG-ZORRO -->
+<nz-calendar
+  (nzPanelChange)="onPanelChange($event)"
+  (nzSelectChange)="onValueChange($event)"
+>
+  <ul *nzDateCell="let date" class="events">
+    <li *ngFor="let dayInfo of getDayInfo(date) | async">
+      <ngx-emoji [emoji]="dayInfo.emoji" set="apple" [size]="20"></ngx-emoji>
+      {{ dayInfo.description }}
+    </li>
+  </ul>
+  <ng-container *nzMonthCell="let month">
+    <div *ngIf="getMonthData(month) as monthData" class="notes-month">
+      <section>{{ monthData }}</section>
+      <span>Backlog number</span>
+    </div>
+  </ng-container>
+</nz-calendar>
+<drawer
+  *ngIf="activeDate"
+  [isVisible]="isDrawerVisible"
+  [date]="activeDate"
+  (onClose)="closeDrawer()"
+></drawer>

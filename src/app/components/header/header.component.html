@@ -1,0 +1,33 @@
+<nz-header *ngIf="authService.isAuthenticated">
+  <div class="left">
+    <div class="logo">
+      <logo mode="light"></logo>
+    </div>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item>
+        <a [routerLink]="['/']">Home</a>
+      </li>
+      <li nz-menu-item>
+        <a [routerLink]="['/dashboard']">Dashboard</a>
+      </li>
+      <li nz-menu-item>
+        <a [routerLink]="['/history']">History</a>
+      </li>
+    </ul>
+  </div>
+  <div class="right">
+    <nz-avatar
+      nzIcon="user"
+      [nzSrc]="authService.user.profile.picture"
+    ></nz-avatar>
+    <h5 nz-title>{{ authService.user.profile.name }}</h5>
+    <button class="logout-button">
+      <span
+        nz-icon
+        nzType="logout"
+        (click)="signOut()"
+        nzTheme="outline"
+      ></span>
+    </button>
+  </div>
+</nz-header>

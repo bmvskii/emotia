@@ -1,0 +1,27 @@
+nz-content {
+  margin: 20px 20px 0 20px;
+  padding: 24px;
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCy9REb80nEym5psIsHMKQhzi2Zprx2OSOiHM9zhFmmNhVWqZcHxLcN829iMhg4xZxn0E&usqp=CAU') no-repeat center;
+  background-size: cover;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Source Code Pro', Arial, Helvetica, sans-serif;
+}
+
+nz-layout {
+  min-height: 100vh;
+  display: grid;
+  grid: auto 1fr auto / 1fr;
+}
+
+nz-footer {
+  text-align: center;
+  padding: 24px;
+  background-color: #fff;
+}

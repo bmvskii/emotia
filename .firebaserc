@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "moodtrackerapp-a787d": {
+      "hosting": {
+        "mood-tracker-app": [
+          "moodtrackerapp-a787d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "moodtrackerapp-a787d"
+  }
+}

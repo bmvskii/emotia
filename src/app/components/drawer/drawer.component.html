@@ -1,0 +1,29 @@
+<nz-drawer
+  [nzVisible]="isVisible"
+  [nzWidth]="640"
+  [nzClosable]="false"
+  (nzOnClose)="close()"
+>
+  <ng-container *nzDrawerContent>
+    <p class="title" style="margin-bottom: 24px">
+      {{ getFormattedDate(date) }}
+    </p>
+    <!-- <nz-descriptions [nzColumn]="2" nzTitle="Day info">
+      <nz-descriptions-item nzTitle="Average Mood" [nzSpan]="1">
+        <reaction [emoji]="averageMood" [size]="40"></reaction>
+        {{ getMoodLabel() }}</nz-descriptions-item
+      >
+      <nz-descriptions-item nzTitle="Average Energy Level" [nzSpan]="1">
+        <reaction emoji="zap" [size]="40"></reaction>
+        {{ getEnergyLevel() }}</nz-descriptions-item
+      >
+    </nz-descriptions> -->
+    <nz-divider></nz-divider>
+    <h4 nz-title>Emotional timeline</h4>
+    <app-reactions-timeline [date]="date"></app-reactions-timeline>
+    <nz-divider></nz-divider>
+    <h4 nz-title>Day infographic</h4>
+    <line-chart></line-chart>
+    <nz-divider></nz-divider>
+  </ng-container>
+</nz-drawer>

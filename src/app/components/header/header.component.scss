@@ -1,0 +1,83 @@
+nz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+[nz-menu] {
+  display: flex;
+  line-height: 64px;
+  list-style: none;
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.ant-menu-dark.ant-menu-horizontal>.ant-menu-item:hover {
+  background-image: linear-gradient(109.5deg, rgba(229, 233, 177, 1) 11.2%, rgba(223, 205, 187, 1) 100.2%);
+  background-color: unset;
+
+  a {
+    color: black;
+  }
+}
+
+.logout-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: unset;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  border-radius: 10px;
+
+  &:hover {
+    background-image: linear-gradient(109.5deg, rgba(229, 233, 177, 1) 11.2%, rgba(223, 205, 187, 1) 100.2%);
+
+    span {
+      color: black;
+    }
+  }
+
+  span {
+    color: rgba(147, 230, 241, 1);
+    font-weight: bold;
+  }
+}
+
+
+[nz-menu-item] {
+  color: white;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &>a {
+    color: #fff;
+  }
+}
+
+.left {
+  display: flex;
+  align-items: center;
+}
+
+.right {
+  display: flex;
+  align-items: center;
+
+  h5 {
+    color: #fff;
+    margin-left: 10px;
+    margin-bottom: 0;
+    margin-right: 5px;
+  }
+
+  &>a {
+    color: #fff;
+  }
+}

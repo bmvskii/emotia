@@ -1,0 +1,109 @@
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+@mixin background {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.memory__info-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.left,
+.right {
+  display: flex;
+  align-items: center;
+
+  ngx-emoji {
+    margin-right: 10px;
+  }
+}
+
+.memory__info-description {
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-filter {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  @include background();
+
+  app-range-selector {
+    margin-left: 10px;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  .title {
+    font-size: 20px;
+    margin-right: 20px;
+  }
+}
+
+.memories-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 0 0;
+  list-style: none;
+  width: 50%;
+  padding: 20px;
+}
+
+.memories {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+}
+
+.memory {
+  &:not(:last-child) {
+    margin-top: 20px;
+  }
+}
+
+.memory__text {
+  margin-bottom: 0;
+}
+
+.stats-block-wrapper {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.stats-block {
+  @include background();
+  padding: 20px;
+
+  &:not(:last-child) {
+    margin-right: 20px;
+  }
+}
+
+.memory__info {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  @include background();
+
+  &:hover {
+    background-image: linear-gradient(109.5deg, rgba(229, 233, 177, 1) 11.2%, rgba(223, 205, 187, 1) 100.2%);
+  }
+
+  &:not(:last-child) {
+    margin-bottom: 10px;
+  }
+}

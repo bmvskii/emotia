@@ -1,0 +1,88 @@
+<div class="page-wrapper">
+  <h1>Home page</h1>
+  <div class="content-wrapper">
+    <div class="top-panel">
+      <!-- <nz-statistic [nzValue]="93" [nzSuffix]="'/ 100'"></nz-statistic> -->
+      <div class="top-panel__mood">
+        <div class="top-panel__blocks">
+          <div class="top-panel__block">
+            <h3 nz-title>Mood Status</h3>
+            <reaction [emoji]="averageMood" [size]="40"></reaction>
+            <h4 nz-title>{{ getMoodLabel() }}</h4>
+          </div>
+          <!-- <div class="top-panel__block">
+            <h4 nz-title>Daily progress</h4>
+            <circular-progress></circular-progress>
+          </div> -->
+          <div class="top-panel__block">
+            <h3 nz-title>Energy level</h3>
+            <reaction emoji="zap" [size]="40"></reaction>
+            <h4 nz-title>{{ getEnergyLevel() }}</h4>
+          </div>
+        </div>
+        <div class="top-panel__block">
+          <line-chart></line-chart>
+        </div>
+      </div>
+
+      <!-- <h3>Activities</h3>
+      <ul class="top-panel__activities">
+        <li class="top-panel__activity" *ngFor="let routine of routines">
+          <span
+            nz-icon
+            [nzType]="
+              routine.status === 'completed' ? 'close-circle' : 'check-circle'
+            "
+            nzTheme="outline"
+          ></span>
+          {{ routine.name }}
+        </li>
+      </ul> -->
+    </div>
+    <div class="reactions-timeline">
+      <div class="reactions-timeline__content">
+        <app-reactions-timeline
+          [compact]="true"
+          (averageEmojiCalculated)="saveAvgEmoji($event)"
+        ></app-reactions-timeline>
+      </div>
+      <form class="reactions-timeline__form">
+        <div class="form__block">
+          <h5 nz-typography class="form__block-title">
+            What emotion are you feeling?
+          </h5>
+          <input
+            nz-input
+            placeholder="Write what you feel"
+            [(ngModel)]="title"
+            name="title"
+          />
+        </div>
+        <div class="form__block">
+          <h5 nz-typography class="form__block-title">Write more</h5>
+          <textarea
+            rows="4"
+            nz-input
+            [(ngModel)]="description"
+            name="description"
+            placeholder="Write your thoughts about a moment."
+          ></textarea>
+        </div>
+        <div class="form__block">
+          <h5 nz-typography class="form__block-title">Select emotion</h5>
+          <reactions-panel
+            (onEmojiSelect)="saveSelectedEmoji($event)"
+          ></reactions-panel>
+        </div>
+        <div class="form__block">
+          <h5 nz-typography>Energy Level</h5>
+          <slider (sliderValueChanged)="saveSliderValue($event)"></slider>
+        </div>
+
+        <button nz-button nzType="primary" (click)="onAddToTimeline($event)">
+          Add to timeline
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

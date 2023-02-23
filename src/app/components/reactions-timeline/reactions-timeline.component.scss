@@ -1,0 +1,40 @@
+::ng-deep nz-timeline {
+  width: 100%;
+  min-height: 200px;
+
+  &.compact {
+    max-height: 300px;
+    overflow-y: auto;
+  }
+
+  & .ant-timeline {
+
+    & .ant-timeline-item {
+      & .ant-timeline-item-tail {
+        left: 20px !important;
+        border-left-color: rgba(black, .5);
+      }
+
+      & .ant-timeline-item-label {
+        left: calc(50% - 22px) !important;
+        font-size: 20px;
+      }
+
+      &.ant-timeline-item-last {
+        padding-bottom: 0 !important;
+      }
+
+      & .ant-timeline-item-head {
+        background: transparent;
+        left: 20px !important;
+        top: 20px !important;
+      }
+
+      & .ant-timeline-item-content {
+        font-size: 20px;
+        left: 30px !important;
+        top: 3px !important;
+      }
+    }
+  }
+}

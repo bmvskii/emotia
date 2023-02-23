@@ -1,0 +1,9 @@
+<ul class="reactions-panel" (deselectEmoji)="onClear()">
+  <li *ngFor="let reaction of reactions; let i = index">
+    <reaction
+      [emoji]="reaction"
+      [class.selected]="isSelected(reaction)"
+      (click)="onHandleSelect(i)"
+    ></reaction>
+  </li>
+</ul>
