@@ -1,17 +1,42 @@
-import { createAction, props } from '@ngrx/store';
-import { IDayReactions } from './reactions-timeline.selector';
-import { Reaction } from 'src/app/components/reaction/reaction.model';
+import { createReducer, on } from '@ngrx/store';
+import * as ReactionTimelineActions from './reactions-timeline.actions';
+import { initialState } from './reactions-timeline.selector';
 
-export const ADD_REACTION = '[Reactions Timeline] Add Reaction';
+export const reactionTimelineReduce = createReducer(
+  initialState,
+  on(ReactionTimelineActions.AddReaction, (state, { reaction, id, date }) => {
+    if (!id) {
+      return state;
+    }
 
-export const ADD_REACTIONS = '[Reactions Timeline] Add Reaction';
-
-export const AddReaction = createAction(
-  ADD_REACTION,
-  props<{ date: string; reaction: Reaction; id: string }>()
-);
-
-export const AddReactions = createAction(
-  ADD_REACTIONS,
-  props<{ reactions: IDayReactions }>()
+    const currDateReaction = state.reactions[date] || [];
+    return {
+      ...state,
+      reactions: {
+        ...state.reactions,
+        [date]: [
+          ...currDateReaction,
+          {
+            ...reaction.toObject(),
+            id,
+          },
+        ],
+      },
+    };
+  }),
+  on(ReactionTimelineActions.AddReactions, (state, { reactions }) => {
+    return {
+      ...state,
+      reactions: {
+        ...state.reactions,
+        ...reactions,
+      },
+    };
+  }),
+  on(ReactionTimelineActions.ClearReactions, (state) => {
+    return {
+      ...state,
+      reactions: {},
+    };
+  })
 );

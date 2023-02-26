@@ -2,8 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from '@firebase/app-compat';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../store/app.reducer';
+import { ClearReactions } from '../store/reactions-timeline/reactions-timeline.actions';
+import { Login, Logout } from '../store/auth/auth.actions';
+import {
+  selectAuthStatus,
+  selectUserInfo,
+  TUser,
+} from '../store/auth/auth.selector';
 
-type UserInfo = firebase.default.auth.AdditionalUserInfo;
+export type UserInfo = firebase.default.auth.AdditionalUserInfo & {
+  profile: any;
+};
 type Credentials = firebase.default.auth.AuthCredential & {
   accessToken: string;
   idToken: string;
@@ -11,19 +22,27 @@ type Credentials = firebase.default.auth.AuthCredential & {
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user: any = null;
-  isAuthenticated = false;
   userId: string = '';
-
-  token = '';
   accessToken = '';
+  isAuthenticated = false;
+  userInfo: TUser = null;
+
+  isAuthenticated$ = this.store.pipe(select(selectAuthStatus));
+  userInfo$ = this.store.pipe(select(selectUserInfo));
 
   constructor(
     public afAuth: AngularFireAuth,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private store: Store<AppState>
   ) {
     this.checkAuthenticationStatus();
+    this.isAuthenticated$.subscribe((status) => {
+      this.isAuthenticated = status;
+    });
+    this.userInfo$.subscribe((info) => {
+      this.userInfo = info;
+    });
   }
 
   checkAuthenticationStatus() {
@@ -31,9 +50,8 @@ export class AuthService {
     const userInfo = JSON.parse(localStorage.getItem('userData') || 'null');
 
     if (accessToken) {
-      this.isAuthenticated = true;
+      this.store.dispatch(Login({ isAuthenticated: true, userInfo }));
       this.setToken(accessToken);
-      this.setUserData(userInfo);
     }
   }
 
@@ -43,14 +61,16 @@ export class AuthService {
     }
 
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-    const { credential, additionalUserInfo } =
+    const { credential, additionalUserInfo: userInfo } =
       await this.afAuth.signInWithPopup(googleAuthProvider);
 
-    this.setUserData(additionalUserInfo as UserInfo);
+    this.saveUserDataToLocalStorage(userInfo as UserInfo);
     this.setToken((credential as Credentials)?.accessToken);
     await this.setUserId();
 
-    this.isAuthenticated = true;
+    this.store.dispatch(
+      Login({ isAuthenticated: true, userInfo: userInfo as TUser })
+    );
   }
 
   setToken(token: string) {
@@ -75,11 +95,10 @@ export class AuthService {
 
   getUserData() {
     const userData = JSON.parse(localStorage.getItem('userData') || 'null');
-    return userData ? userData : this.user;
+    return userData ? userData : this.userInfo;
   }
 
-  setUserData(data: UserInfo) {
-    this.user = data;
+  saveUserDataToLocalStorage(data: UserInfo) {
     localStorage.setItem('userData', JSON.stringify(data));
   }
 
@@ -92,11 +111,8 @@ export class AuthService {
   async signOut() {
     await this.afAuth.signOut();
     this.removeLocalStorageData();
-    this.isAuthenticated = false;
+    this.store.dispatch(ClearReactions());
+    this.store.dispatch(Logout());
     this.router.navigate(['/auth'], { relativeTo: this.route });
-  }
-
-  async getUser() {
-    return this.user;
   }
 }

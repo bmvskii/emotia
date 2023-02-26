@@ -1,8 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Routine, Status } from './routine.model';
 import { Store } from '@ngrx/store';
 import { Emojis } from '../../components/reaction/constants/emojiis';
-import { AddReaction } from 'src/app/store/reactions-timeline/reactions-timeline.reducer';
+import { AddReaction } from 'src/app/store/reactions-timeline/reactions-timeline.actions';
 import { Reaction } from 'src/app/components/reaction/reaction.model';
 import { ReactionsService } from 'src/app/services/reactions.service';
 import { AppState } from 'src/app/store/app.reducer';
@@ -19,11 +18,6 @@ import { NzMessageService } from 'ng-zorro-antd/message';
   styleUrls: ['./home.component.scss'],
 })
 export class HomePage {
-  routines = [
-    new Routine(Status.Completed, 'Routine name 1'),
-    new Routine(Status.NotCompleted, 'Routine name 2'),
-    new Routine(Status.Completed, 'Routine name 3'),
-  ];
   averageMood: string = 'robot_face';
   averageEnergyLevel: number = 10;
   selectedEmoji: Emojis | Emojis[] | null = null;

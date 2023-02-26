@@ -15,19 +15,14 @@
       </li>
     </ul>
   </div>
-  <div class="right">
+  <div class="right" *ngIf="authService.userInfo">
     <nz-avatar
       nzIcon="user"
-      [nzSrc]="authService.user.profile.picture"
+      [nzSrc]="authService.userInfo.profile.picture"
     ></nz-avatar>
-    <h5 nz-title>{{ authService.user.profile.name }}</h5>
-    <button class="logout-button">
-      <span
-        nz-icon
-        nzType="logout"
-        (click)="signOut()"
-        nzTheme="outline"
-      ></span>
+    <h5 nz-title>{{ authService.userInfo.profile.name }}</h5>
+    <button class="logout-button" (click)="signOut()">
+      <span nz-icon nzType="logout" nzTheme="outline"></span>
     </button>
   </div>
 </nz-header>

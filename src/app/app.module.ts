@@ -17,7 +17,6 @@ import { AppComponent } from './app.component';
 import { Header } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { DashboardPage } from './pages/dashboard/dashboard.component';
-import { TrackerBoardComponent } from './components/tracker-board/tracker-board.component';
 import { HomePage } from './pages/home/home.component';
 import { ReactionComponent } from './components/reaction/reaction.component';
 
@@ -25,7 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ModalComponent } from './shared/modal/modal.component';
 import { ReactionsTimelineComponent } from './components/reactions-timeline/reactions-timeline.component';
-import { MoodPanelComponent } from './components/mood-panel/mood-panel.component';
 import { SettingsPage } from './pages/settings/settings.component';
 import { HistoryPage } from './pages/history/history.component';
 import { SharedModule } from './shared/shared.module';
@@ -41,6 +39,7 @@ import { AuthPage } from './pages/auth/auth.component';
 import { AuthInterceptorService } from './pages/auth/auth.interceptor';
 import { Logo } from './components/logo/logo.component';
 import { LineChart } from './components/line-chart/line-chart.component';
+import { ReactionsResolverService } from './services/reactions-resolver.service';
 
 registerLocaleData(en);
 
@@ -50,13 +49,11 @@ registerLocaleData(en);
     Header,
     FooterComponent,
     DashboardPage,
-    TrackerBoardComponent,
     HomePage,
     ReactionComponent,
     NotFoundComponent,
     ModalComponent,
     ReactionsTimelineComponent,
-    MoodPanelComponent,
     SettingsPage,
     HistoryPage,
     ReactionsPanelComponent,
@@ -90,6 +87,7 @@ registerLocaleData(en);
       useClass: AuthInterceptorService,
       multi: true,
     },
+    ReactionsResolverService,
   ],
   bootstrap: [AppComponent],
 })

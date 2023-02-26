@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Reaction } from '../components/reaction/reaction.model';
-import { catchError, filter, map, Observable, of, pluck } from 'rxjs';
-import { format, isWithinInterval } from 'date-fns';
+import { catchError, map } from 'rxjs';
+import { isWithinInterval } from 'date-fns';
 import { formatDate } from '../utils/index';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../store/app.reducer';
-import {
-  selectReactions,
-  IDayReactions,
-} from 'src/app/store/reactions-timeline/reactions-timeline.selector';
+import { selectReactions } from 'src/app/store/reactions-timeline/reactions-timeline.selector';
 import { environment as env } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { Emojis } from '../components/reaction/constants/emojiis';
@@ -22,13 +19,12 @@ export class ReactionsService {
   constructor(
     private http: HttpClient,
     private store: Store<AppState>,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router
+    private authService: AuthService
   ) {}
 
   getAllReactions() {
-    const url = `${env.API_URL}/${this.authService.getUserId()}/reactions.json`;
+    const userId = this.authService.getUserId();
+    const url = `${env.API_URL}/${userId}/reactions.json`;
     return this.http.get(url).pipe(
       map((res) =>
         res
@@ -99,8 +95,4 @@ export class ReactionsService {
       .post(url, reaction)
       .pipe(catchError(() => this.authService.signOut()));
   }
-
-  editReaction() {}
-
-  removeAllReactions() {}
 }
